@@ -1,0 +1,78 @@
+<%- include('../template/head')-%>
+
+<body class="text-center">
+    <div>
+        <%- include('../template/nav')-%>
+        <main role="main" class="container">
+
+              <div class="row">
+                <div class="col-sm-9">
+
+                    <% if (locals.edit) { %>
+                        <h2>Edit an article</h2>
+                    <% } else{ %>
+                        <h2>Create new article</h2>
+                    <% } %>
+
+                    <form 
+
+                    <% if (locals.edit) { %>
+                        action="/update/<%=article._id%>" 
+                    <% } else{ %>
+                        action="/store" 
+                    <% } %>
+
+                    
+                    method="POST">
+                        <div class="form-group">
+                            <label for="title_input">Title</label>
+                            <input type="text" class="form-control" id="title_input" name="title" placeholder="Title" value="<%=article ? article.title: ''%>">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="category_select">Select Category</label>
+                            <select class="form-control" id="category_select" name="category">
+                            <%  for (let category of categories){ %>
+                                <option value="<%=category%>" <%=article && article.category == category ? 'selected' : ''%>><%=category%></option>
+                            <% } %>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description_textarea">Description</label>
+                            <textarea class="form-control" id="description_textarea" rows="3" name="description"><%=article ? article.description: ''%></textarea>
+                            </div>
+                        <div class="form-group">
+                            <label for="content_textarea">Content</label>
+                            <textarea class="form-control" id="content_textarea" rows="10" name="content"><%=article ? article.content: ''%></textarea>
+                        </div>
+
+                        <% if (locals.edit) { %>
+                            <button type="button" class="btn btn-danger">
+                                <a href="/delete/<%=article._id%>" style="color:white; text-decoration: none;">Delete</a>
+                            </button>
+                        <% } %>
+
+                        <button type="submit" class="btn btn-primary">
+                            <% if (locals.edit) { %>
+                                Save and Publish
+                            <% } else{ %>
+                                Publish
+                            <% } %>
+                        </button>
+
+                    </form>    
+                    
+                </div>
+
+                <div class="col-sm-3">
+                    <%- include('../template/weather')-%>
+                </div>
+              </div>
+
+        </main>
+
+        <%- include('../template/footer')-%>
+    </div>
+</body>
+</html>

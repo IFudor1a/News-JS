@@ -1,0 +1,105 @@
+<%- include('../template/head')-%>
+
+<body class="text-center">
+    <div>
+        <%- include('../template/nav')-%>
+        <main role="main" class=" container">
+              <div class="row">
+                <div class="col-sm-9">
+                    <div style="text-align: left;" class="mt-4 mb-4">
+                        <form action="/" method="GET">
+                            <h4>Filters</h4>
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="category_select">Category</label>
+                                        <select class="form-control" id="category_select" name="category">
+                                            <option value="">All</option>
+                                        <%  for (let category of categories){ %>
+                                            <option value="<%=category%>" <%=filters.category == category ? 'selected' : ''%>><%=category%></option>
+                                            <% } %>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label for="whose_select">Whose</label>
+                                        <select class="form-control" id="whose_select" name="whose" required>
+                                            <option value="world" <%=filters.whose == 'world' ? 'selected' : ''%>>World</option>
+                                            <option value="my" <%=filters.whose == 'my' ? 'selected' : ''%>>My</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div style="text-align:right; align-items: flex-end;">
+                                <button type="button" class="btn btn-danger"><a href="/aboutus" style=" color:white; text-decoration: none;">About</a></button>
+                                <button type="button" class="btn btn-success"><a href="/create" style="color:white; text-decoration: none;">+New Post</a></button>
+                                <button type="submit" class="btn btn-primary">Apply</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <hr>
+
+                    <div class="row" style="display: flex; flex-wrap: wrap; text-align: left;">
+                        <%  for (let item of news){ %>
+                            <div class="col-sm-6 d-flex align-items-stretch mt-3 mb-3">
+                                <div class="card w-100">
+                                    <% if (!item._id) { %>
+                                        <img src="<%=item.urlToImage%>" class="card-img-top" alt="<%=item.title%>">
+                                    <% } %>
+
+                                    <div class=" card-body d-flex flex-column">
+                                        <p class="card-title" style="text-align: center;"><strong><%=item.title%></strong></p>
+                                        <p class="card-text small"><%=item.description%></p>
+
+
+                                        <div style="text-align: right;" class="mt-auto d-flex justify-content-between">
+                                            <p class="card-text"><%=item.source ? item.source.name : ''%></p>
+
+                                            <div>
+                                                <% if (item._id) { %>
+                                                    <button type="button" class="btn btn-primary mr-2" style="width: 130px;"><a href="/edit/<%=item._id%>" style="color:white; text-decoration: none;">Edit</a></button>
+                                                <% } else {%>
+                                                    <a href="<%=item.url%>">Read more</a>
+                                                <% }%>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-footer">
+                                        <div class="d-flex justify-content-between">
+                                            <small class="text-muted"><%=item.author ? item.author: ''%></small>
+                                            <small class="text-muted"><%=new Date(item.publishedAt).toLocaleString()%></small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <% } %>
+                    </div>
+
+                    <% if (!news.length) { %>
+                        <p>There is no news for your filter. Try changing the filter.</p>
+                    <% }%>
+                </div>
+
+                <div class="col-sm-3">
+                    <%- include('../template/weather')-%>
+                    <%- include('../template/currency')-%>
+                </div>
+              </div>
+
+        </main>
+
+        <%- include('../template/footer')-%>
+    </div>
+    <script src="/script.js"></script>
+    <script src="/Weather.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,46 @@
+<%- include('../template/head')-%>
+<body>
+  <%- include('../template/nav')-%>
+  <div class="functionality" style="margin-bottom: 90px;">
+      <div class="container">
+      <div class="row">
+            <div class="col-md-4">
+              <img class="img-fluid " src="/images/goodman.png"   style="height: 400px;">
+          </div>
+        <div class="col-md-6 col-lg-8 pl-lg-5 py-5">
+          <div class="row justify-content-start pb-3">
+            <div class="col-md-12 heading-section ftco-animate">
+              <span class="subheading" style="color: red;">Welcome</span>
+              <h2 class="mb-4">Since we started work in 1980</h2>
+              <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+              <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
+              <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+              <audio id="sound"><source src="public/sounds/aboutus.mp3" type="audio/mp3"></audio>
+         <input type="submit" value="press to listen to me" form="order_form" id="button" class="Button" onclick="playSound('sound');" setTimeout('alert(\'Откладываем второе событие\')', 7000)>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      </div>
+      <div class="parallax" style="background-image: url('/images/bg.jpg') ">
+                <h2 class="title">You are the feauture of Diamond</h2>
+                 <div class="container" style="text-align: center;">
+                 <a href="/" class="Button">News More</a>
+                 </div>
+             </div>
+<%- include('../template/footer')-%>
+<script src="/scriptab"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+  function playSound(sound) {
+  var song = document.getElementById(sound);
+  song.volume = 1;
+  if (song.paused) {
+    song.play();
+  } else {
+    song.pause();
+  }
+}
+</script>
+</body>
+</html>
